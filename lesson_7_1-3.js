@@ -117,10 +117,29 @@ function createFood() {
     }
 }
 
+function isLet(unit) {
+    if(unit.classList.contains('let-unit')) {
+        gameOver();
+    }
+}
+
+function createLet() {
+    while(true) {
+    var foodX = Math.floor(Math.random() * SIZE.WIDTH);
+    var foodY = Math.floor(Math.random() * SIZE.HEIGHT);
+    var $foodCell = $gameTable.children[foodY].children[foodX];
+    if(!snake.includes($foodCell)) {
+        $foodCell.classList.add('let-unit');
+        break;
+    }
+    }
+}
+
 function handleStartClick(event) {
     respawn();
     interval = setInterval(move, SNAKE_SPEED);
     createFood();
+    createLet();
 }
 
 function handleRenewClick(event) {
